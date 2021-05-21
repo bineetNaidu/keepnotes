@@ -1,0 +1,37 @@
+scalar Date
+
+type User {
+  id: ID!
+  email: String!
+}
+
+type Note {
+  id: ID!
+  title: String!
+  details: String!
+  authorId: ID
+  created_at: Date!
+}
+
+input UpdateNoteInput {
+  title: String
+  details: String
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Query {
+  me: User
+  myNotes: [Note]
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthPayload
+  signup(email: String!, password: String!): AuthPayload
+  createNote(title: String!, details: String!): Note
+  updateNote(id: ID!, data: UpdateNoteInput): Note
+  deleteNote(id: ID!): Boolean
+}
