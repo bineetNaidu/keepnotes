@@ -14,7 +14,6 @@ const me = async (_parent: null, __args: null, ctx: MyContext) => {
     return {
       id: user.id,
       email: user.email,
-      notes: user.password,
     };
   } else {
     return null;

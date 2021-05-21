@@ -13,6 +13,14 @@ interface NoteCreateArgs {
   details: string;
 }
 
+interface NoteUpdateArgs {
+  id: string;
+  data: {
+    title: string;
+    details: string;
+  };
+}
+
 async function signup(_parent: any, args: ArgsType, context: MyContext) {
   const password = await bcrypt.hash(args.password, 10);
 
@@ -78,8 +86,69 @@ const createNote = async (
   return note;
 };
 
+const updateNote = async (
+  _parent: any,
+  args: NoteUpdateArgs,
+  ctx: MyContext
+) => {
+  const uid = ctx.userId();
+
+  if (!uid) {
+    throw new Error('Not Authorized!');
+  }
+
+  const user = await ctx.prisma.user.findUnique({
+    where: { id: Number(uid) },
+  });
+  if (!user) {
+    throw new Error('User was Not Found!');
+  }
+
+  const note = await ctx.prisma.note.update({
+    data: args.data,
+    where: { id: Number(args.id) },
+  });
+
+  if (!note) throw new Error('Note was Not Found');
+
+  return note;
+};
+
+const deleteNote = async (
+  _parent: any,
+  args: { id: number },
+  ctx: MyContext
+) => {
+  const uid = ctx.userId();
+
+  if (!uid) {
+    throw new Error('Not Authorized!');
+  }
+
+  const user = await ctx.prisma.user.findUnique({
+    where: { id: Number(uid) },
+  });
+  if (!user) {
+    throw new Error('User was Not Found!');
+  }
+
+  try {
+    const note = await ctx.prisma.note.delete({
+      where: { id: Number(args.id) },
+    });
+
+    if (!note) throw new Error('Note was Not Found');
+
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 export default {
   login,
   signup,
   createNote,
+  updateNote,
+  deleteNote,
 };

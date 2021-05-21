@@ -1,3 +1,5 @@
+scalar Date
+
 type User {
   id: ID!
   email: String!
@@ -8,6 +10,7 @@ type Note {
   title: String!
   details: String!
   authorId: ID
+  created_at: Date!
 }
 
 input UpdateNoteInput {
@@ -29,6 +32,6 @@ type Mutation {
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, password: String!): AuthPayload
   createNote(title: String!, details: String!): Note
-  updateNote(id: ID, data: UpdateNoteInput): Note
-  deleteNote(id: ID): Boolean
+  updateNote(id: ID!, data: UpdateNoteInput): Note
+  deleteNote(id: ID!): Boolean
 }
