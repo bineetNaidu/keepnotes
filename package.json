@@ -1,0 +1,12 @@
+{
+  "name": "keepnotes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Web App to keep your notes",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "BineetNaidu <bineet.s.naidu@gmail.com> (https://bineetnaidu.github.io/)",
+  "license": "MIT"
+}
