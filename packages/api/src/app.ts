@@ -4,9 +4,15 @@ import { ApolloServer } from 'apollo-server';
 import { PrismaClient } from '@prisma/client';
 import { getTokenPayload } from './utils';
 
+import Query from './resolvers/Query';
+import Mutation from './resolvers/Mutation';
+
 const prisma = new PrismaClient();
 
-const resolvers = {};
+const resolvers = {
+  Query,
+  Mutation,
+};
 
 const server = new ApolloServer({
   typeDefs: fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf8'),

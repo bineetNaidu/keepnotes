@@ -1,20 +1,13 @@
 type User {
   id: ID!
   email: String!
-  notes: [Note]
 }
 
 type Note {
   id: ID!
   title: String!
   details: String!
-  author: User
-  authorId: Int
-}
-
-type Query {
-  me: User
-  myNotes: [Note]
+  authorId: ID
 }
 
 input UpdateNoteInput {
@@ -22,9 +15,19 @@ input UpdateNoteInput {
   details: String
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Query {
+  me: User
+  myNotes: [Note]
+}
+
 type Mutation {
-  login: User
-  signup: User
+  login(email: String!, password: String!): AuthPayload
+  signup(email: String!, password: String!): AuthPayload
   createNote(title: String!, details: String!): Note
   updateNote(id: ID, data: UpdateNoteInput): Note
   deleteNote(id: ID): Boolean
