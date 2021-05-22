@@ -3,6 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client/react';
 
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
@@ -14,6 +15,7 @@ function App() {
     <ApolloProvider client={client}>
       <Switch>
         <Route exact path="/" component={Login} />
+        <Route exact path="/signup" component={Signup} />
 
         <Redirect to="/" />
       </Switch>
