@@ -5,6 +5,7 @@ import { ApolloProvider } from '@apollo/client/react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import Create from './pages/Create';
 import AuthRoute from './components/AuthRoute';
 
 const client = new ApolloClient({
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/signup" component={Signup} />
 
         <AuthRoute exact path="/dashboard" component={Dashboard} />
+        <AuthRoute exact path="/create" component={Create} />
 
         <Redirect to="/" />
       </Switch>
