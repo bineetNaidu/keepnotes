@@ -4,6 +4,8 @@ import { ApolloProvider } from '@apollo/client/react';
 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import AuthRoute from './components/AuthRoute';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
@@ -16,6 +18,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/signup" component={Signup} />
+
+        <AuthRoute exact path="/dashboard" component={Dashboard} />
 
         <Redirect to="/" />
       </Switch>
