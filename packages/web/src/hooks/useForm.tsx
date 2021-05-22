@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-export const useForm = (initialValue: number | string = '') => {
-  const [state, setState] = useState<typeof initialValue>(initialValue);
+export const useForm = (initialValue: any = '') => {
+  const [state, setState] = useState<any>(initialValue);
 
-  const handleChange = (val: string) => {
-    setState(val);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setState(e.target.value);
   };
 
   const resetState = () => {
